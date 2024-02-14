@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "cliente", uniqueConstraints = {@UniqueConstraint(columnNames = {"cpf"}, name = "uk_cpf")})
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,7 @@ public class Cliente {
 	@NotEmpty(message= "{campo.nome.obrigatorio}")
 	private String nome;
 	
-	@Column(nullable = false, length = 150)
+	@Column(nullable = false, length = 150,unique = true)
 	@NotNull(message = "{campo.cpf.obrigatorio}")
 	@CPF(message = "{campo.cpf.valido}")
 	private String cpf;
