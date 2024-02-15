@@ -24,6 +24,7 @@ import com.github.Lucassamuel97.clientes.model.repository.ServicoPrestadoReposit
 import com.github.Lucassamuel97.clientes.rest.dto.ServicoPrestadoDTO;
 import com.github.Lucassamuel97.clientes.util.BigDecimalConverter;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -37,7 +38,7 @@ public class ServicoPrestadoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ServicoPrestado salvar(@RequestBody ServicoPrestadoDTO dto){
+	public ServicoPrestado salvar(@RequestBody @Valid ServicoPrestadoDTO dto){
 		
 		LocalDate data = LocalDate.parse(dto.getData(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		Integer idCliente = dto.getIdCliente();
